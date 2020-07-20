@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ProyectoFinal.Models.Productos>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@if (Model.Any())
+{
+    
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-3 m-padding p-2 sh">
+                <div class="card col-12 m-padding" >
+                    <img src="@item.ProductoImagenes" class="card-img-top" alt="@item.ProductoTitulo">
+                    <div class="card-body">
+                        <p class="font-weight-bold black-text">@item.ProductoTitulo</p>
+                        <button type="button" class="btn btn-black btn-rounded btn-sm px-3">Buy Now</button>
+                        <button type="button" class="btn btn-outline-black btn-rounded btn-sm px-3 waves-effect">Details</button>
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+
+}
+else {
+    <h1>No hay productos</h1>
+}

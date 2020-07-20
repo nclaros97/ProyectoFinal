@@ -1,0 +1,26 @@
+﻿@model ProyectoFinal.Models.Unidades
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Unidades</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UnidadesNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnidadesNombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UnidadesId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

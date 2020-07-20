@@ -1,0 +1,73 @@
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    @Html.ActionLink("Krisali", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                @Html.ActionLink("Inicio", "Index", "Home",null,htmlAttributes: new { @class = "nav-link" })
+                
+            </li>
+            @*<li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>*@
+            @if(User.IsInRole("admin")){
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Mantenimiento
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @Html.ActionLink("Usuarios", "IndexUsers", "Account", null, htmlAttributes: new { @class = "dropdown-item" })
+                <div class="dropdown-divider"></div>
+                @Html.ActionLink("Roles", "IndexRoles", "Account", null, htmlAttributes: new { @class = "dropdown-item" })
+            </div>
+        </li>
+                <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tienda
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @Html.ActionLink("Categorias", "Index", "Categories", null, htmlAttributes: new { @class = "dropdown-item" })
+                @Html.ActionLink("Unidades", "Index", "Unidades", null, htmlAttributes: new { @class = "dropdown-item" })
+                <div class="dropdown-divider"></div>
+                @Html.ActionLink("Productos", "Index", "Productos", null, htmlAttributes: new { @class = "dropdown-item" })
+
+            </div>
+        </li>
+            }
+            @*<li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>*@
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        @Html.Partial("_LoginPartial")
+    </div>
+</nav>
+
+
+@*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li></li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>*@

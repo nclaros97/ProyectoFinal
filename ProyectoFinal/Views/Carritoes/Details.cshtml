@@ -1,0 +1,58 @@
+﻿@model ProyectoFinal.Models.Carrito
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Carrito</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Producto.ProductoTitulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Producto.ProductoTitulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarritoCantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarritoCantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarritoSubTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarritoSubTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaAgregado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaAgregado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CarritoId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

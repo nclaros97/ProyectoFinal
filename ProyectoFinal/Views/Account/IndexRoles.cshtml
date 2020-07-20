@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+
+@{
+    ViewBag.Title = "Roles";
+}
+
+<h2>Roles           </h2>
+
+<p>
+    @Html.ActionLink("Nuevo Rol", "NuevoRol", null, htmlAttributes: new { @class = "btn btn-info" })
+</p>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditRol", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-info" }) |
+                    @using (Html.BeginForm("DeleteRol", "Account", new { id = item.Id }, FormMethod.Post, new { style = "display:inline-block!important" }))
+                    {
+                        <button class="btn btn-danger" type="submit" onclick="return confirm('Esta seguro de eliminar el rol: @item.Name?')">Eliminar</button>
+                    }
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+else
+{
+    <h1>No se han registrado roles</h1>
+}
