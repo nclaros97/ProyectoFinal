@@ -85,6 +85,7 @@ namespace ProyectoFinal.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    //agregar el carrito anonimo al carrito del usuario autenticado
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

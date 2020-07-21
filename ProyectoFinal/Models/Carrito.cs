@@ -19,8 +19,6 @@ namespace ProyectoFinal.Models
         [Display(Name = "Cantidad")]
         public int CarritoCantidad { get; set; }
 
-        public decimal CarritoSubTotal { get; set; }
-
         [Display(Name = "Fecha")]
         [DataType(DataType.Date)]
         public DateTime FechaAgregado { get; set; }

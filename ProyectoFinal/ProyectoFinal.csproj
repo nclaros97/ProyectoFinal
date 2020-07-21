@@ -258,6 +258,7 @@
     <Compile Include="Models\Pedidos.cs" />
     <Compile Include="Models\Productos.cs" />
     <Compile Include="Models\Unidades.cs" />
+    <Compile Include="Models\ViewModels\CantCarritoViewModel.cs" />
     <Compile Include="Models\ViewModels\CreateProductosViewModel.cs" />
     <Compile Include="Models\ViewModels\RolesUserViewModel.cs" />
     <Compile Include="Models\ViewModels\RoleUserViewModel.cs" />
@@ -455,6 +456,7 @@
     <Content Include="Views\Productos\Details.cshtml" />
     <Content Include="Views\Productos\Edit.cshtml" />
     <Content Include="Views\Productos\Index.cshtml" />
+    <Content Include="Views\Carritoes\_Carrito.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

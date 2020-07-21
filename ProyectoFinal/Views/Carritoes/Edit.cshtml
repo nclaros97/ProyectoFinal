@@ -33,14 +33,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CarritoSubTotal, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CarritoSubTotal, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CarritoSubTotal, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.FechaAgregado, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FechaAgregado, new { htmlAttributes = new { @class = "form-control" } })

@@ -1,57 +1,51 @@
 ﻿@model IEnumerable<ProyectoFinal.Models.Carrito>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Carrito";
 }
 
-<h2>Index</h2>
+<h2>Carrito</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.Producto.ProductoTitulo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UsuarioId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CarritoCantidad)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CarritoSubTotal)
+            @Html.DisplayNameFor(model => model.FechaAgregado)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaAgregado)
+            Sub Total
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
+    var cantidad = (Html.DisplayFor(modelItem => item.CarritoCantidad)).ToString();
+    var precio = Html.DisplayFor(modelItem => item.Producto.ProductoPrecio).ToString();
+    var total = (decimal.Parse(cantidad) * decimal.Parse(precio));
     <tr>
+        <td>@Html.ActionLink("Borrar", "Edit", new { id = item.CarritoId })</td>
         <td>
             @Html.DisplayFor(modelItem => item.Producto.ProductoTitulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsuarioId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CarritoCantidad)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CarritoSubTotal)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.FechaAgregado)
         </td>
+        <td>@total.ToString()</td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CarritoId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CarritoId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CarritoId })
-        </td>
-    </tr>
+            @Html.ActionLink("Quitar 1", "Edit", new { id = item.CarritoId }) &nbsp; &nbsp;
+    @Html.ActionLink("Agregar 1", "Details", new { id = item.CarritoId })
+</td>
+
+</tr>
 }
 
 </table>
