@@ -12,6 +12,7 @@ using ProyectoFinal.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System.Drawing;
+using ProyectoFinal.Models.ViewModels;
 
 namespace ProyectoFinal.Controllers
 {
@@ -27,18 +28,28 @@ namespace ProyectoFinal.Controllers
         }
 
         // GET: Productos/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Detalle(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Productos productos = await db.Productos.FindAsync(id);
-            if (productos == null)
+            var producto =  db.Productos.Include(p => p.Category).Include(p => p.Unidades).Where(p => p.IdProducto == id).First();
+            if (producto == null)
             {
                 return HttpNotFound();
             }
-            return View(productos);
+
+            var imagenes =  db.ImagenesProductos.Where(p => p.IdProducto == id).ToList();
+
+            var data = new DetalleProductoViewModel
+            {
+                producto = producto,
+                imagenesProducto = imagenes,
+                Cantidad = 1
+            };
+
+            return View(data);
         }
 
         // GET: Productos/Create

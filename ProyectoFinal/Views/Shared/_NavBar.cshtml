@@ -1,55 +1,52 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    @Html.ActionLink("Krisali", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+﻿<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container">
+        @Html.ActionLink("Krisali", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                @Html.ActionLink("Inicio", "Index", "Home", null, htmlAttributes: new { @class = "nav-link" })
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    @Html.ActionLink("Inicio", "Index", "Home", null, htmlAttributes: new { @class = "nav-link" })
 
-            </li>
-            @*<li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>*@
-            @if (User.IsInRole("admin"))
-            {
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Mantenimiento
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @Html.ActionLink("Usuarios", "IndexUsers", "Account", null, htmlAttributes: new { @class = "dropdown-item" })
-                        <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Roles", "IndexRoles", "Account", null, htmlAttributes: new { @class = "dropdown-item" })
-                    </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tienda
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @Html.ActionLink("Categorias", "Index", "Categories", null, htmlAttributes: new { @class = "dropdown-item" })
-                        @Html.ActionLink("Unidades", "Index", "Unidades", null, htmlAttributes: new { @class = "dropdown-item" })
-                        <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Productos", "Index", "Productos", null, htmlAttributes: new { @class = "dropdown-item" })
+                @*<li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>*@
+                @if (User.IsInRole("admin"))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mantenimiento
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("Usuarios", "IndexUsers", "Account", null, htmlAttributes: new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Roles", "IndexRoles", "Account", null, htmlAttributes: new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Tienda
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("Categorias", "Index", "Categories", null, htmlAttributes: new { @class = "dropdown-item" })
+                            @Html.ActionLink("Unidades", "Index", "Unidades", null, htmlAttributes: new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Productos", "Index", "Productos", null, htmlAttributes: new { @class = "dropdown-item" })
 
-                    </div>
-                </li>
-            }
-            @*<li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>*@
-        </ul>
+                        </div>
+                    </li>
+                }
+                @*<li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>*@
+            </ul>
 
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
-
-        <div id="carrito" style="padding-left:5px;"></div>
-        @Html.Partial("_LoginPartial")
+            <div id="carrito" style="padding-left:5px;"></div>
+            @Html.Partial("_LoginPartial")
+        </div>
     </div>
 </nav>
 

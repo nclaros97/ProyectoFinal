@@ -15,8 +15,12 @@ namespace ProyectoFinal.Controllers
     public class HomeController : Controller
     {
         private ProyectoFinalDbContext db = new ProyectoFinalDbContext();
-        public ActionResult Index()
+        public ActionResult Index(string msg)
         {
+            if (msg != null)
+            {
+                ViewBag.Mensaje = msg;
+            }
             var productosGroupByCat = new List<Productos>();
             var productos = db.Productos.Include(p => p.Category).Include(p => p.Unidades);
 

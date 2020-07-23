@@ -1,0 +1,74 @@
+﻿@model ProyectoFinal.Models.ViewModels.DetalleProductoViewModel
+@{ 
+    ViewBag.Title = "Producto";
+}
+<!--Main layout-->
+<main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+
+                <img src="@Model.producto.ProductoImagenes" class="img-fluid" alt="">
+                @if (Model.imagenesProducto.Count > 1)
+                {
+            <div class="row" style="margin-top:15px;">
+                @foreach (var imagen in Model.imagenesProducto)
+                {
+
+                <div class="col-lg-3"><img src="@imagen.urlImagen" class="img-fluid" alt="" width="100" /></div>
+
+
+                }
+            </div>
+                }
+
+            </div>
+            <!--Grid column-->
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+
+                <!--Content-->
+                <div class="p-4">
+
+                    <div class="mb-3">
+                        <a href="/Categories/Todo/@Model.producto.Category.CategoryKey">
+                            <span class="badge purple mr-1">@Model.producto.Category.CotegoryName</span>
+                        </a>
+                    </div>
+
+                    <p class="lead">
+                        <span>L @Model.producto.ProductoPrecio</span>
+                    </p>
+                    <h3>@Model.producto.ProductoTitulo</h3>
+                    <p class="lead font-weight-bold">Descripción</p>
+
+                    <p>
+                        @Model.producto.ProdutoDescripcion
+                    </p>
+
+                    <form method="post" action="/Carritoes/Add/@Model.producto.IdProducto" class="d-flex justify-content-left">
+                        <!-- Default input -->
+                        @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control", type = "number", min = "1", value = @Model.Cantidad, style = "width: 100px" } })
+                        @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
+                        <button class="btn btn-primary btn-md my-0 p" style="margin-left:5px;" type="submit">
+                            Añadir al carrito
+                            <i class="fas fa-shopping-cart ml-1"></i>
+                        </button>
+
+                    </form>
+
+                </div>
+                <!--Content-->
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+    </div>
+</main>
+<!--Main layout-->

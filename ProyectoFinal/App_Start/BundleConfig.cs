@@ -22,9 +22,27 @@ namespace ProyectoFinal
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/fontaw").Include(
+                      "~/Scripts/fontawesome/all.js"
+                      
+                      ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/fontawesome.min.css",
+                      "~/Content/fontawesome.all.css",
+                      "~/Content/fontawesome.all.min.css",
+                      "~/Content/fontawesome.css",
+                      "~/Content/regular.min.css",
+                      "~/Content/regular.css",
+                      "~/Content/solid.css",
+                      "~/Content/solid.min.css",
+                      "~/Content/svg-with-js",
+                      "~/Content/svg-with-js.min.css",
+                      "~/Content/v4-shims.css",
+                      "~/Content/v4-shims.min.css"
+                      ));
         }
     }
 }

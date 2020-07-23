@@ -2,10 +2,14 @@
 
 @{
     ViewBag.Title = "Carrito";
+    System.Data.SqlTypes.SqlMoney Grantotal = 0;
 }
 
 <h2>Carrito</h2>
-
+    @if (ViewBag.Mensaje != null)
+    {
+<div class="alert alert-info">@ViewBag.Mensaje</div>
+    }
 <table class="table">
     <tr>
         <th></th>
@@ -16,7 +20,7 @@
             @Html.DisplayNameFor(model => model.CarritoCantidad)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaAgregado)
+            @Html.DisplayNameFor(model => model.Producto.ProductoPrecio)
         </th>
         <th>
             Sub Total
@@ -24,28 +28,57 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    var cantidad = (Html.DisplayFor(modelItem => item.CarritoCantidad)).ToString();
-    var precio = Html.DisplayFor(modelItem => item.Producto.ProductoPrecio).ToString();
-    var total = (decimal.Parse(cantidad) * decimal.Parse(precio));
-    <tr>
-        <td>@Html.ActionLink("Borrar", "Edit", new { id = item.CarritoId })</td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Producto.ProductoTitulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CarritoCantidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaAgregado)
-        </td>
-        <td>@total.ToString()</td>
-        <td>
-            @Html.ActionLink("Quitar 1", "Edit", new { id = item.CarritoId }) &nbsp; &nbsp;
-    @Html.ActionLink("Agregar 1", "Details", new { id = item.CarritoId })
-</td>
+    @foreach (var item in Model)
+    {
+        var cantidad = (Html.DisplayFor(modelItem => item.CarritoCantidad)).ToString();
+        var precio = Html.DisplayFor(modelItem => item.Producto.ProductoPrecio).ToString();
+        var total = (decimal.Parse(cantidad) * decimal.Parse(precio));
+        Grantotal += total;
+        <tr>
+            <td>
+                @using (Html.BeginForm("Delete", "Carritoes", new { id = item.CarritoId }, FormMethod.Post, htmlAttributes: new { style = "display:inline-block;" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producto.ProductoTitulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarritoCantidad)
+            </td>
+            <td>
+                L @Html.DisplayFor(modelItem => item.Producto.ProductoPrecio)
+            </td>
+            <td>L @total.ToString()</td>
+            <td>
+                @using (Html.BeginForm("RemoveOne", "Carritoes", new { id = item.IdProducto }, FormMethod.Post, htmlAttributes: new { style = "display:inline-block;" }))
+                {
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-minus"></i></button>
+                }
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                @using (Html.BeginForm("AddOne", "Carritoes", new { id = item.IdProducto }, FormMethod.Post, htmlAttributes: new { style = "display:inline-block;" }))
+                {
+                    <button class="btn btn-success" type="submit"><i class="fas fa-plus"></i></button>
+                }
+            </td>
 
-</tr>
-}
+        </tr>
 
+    }
 </table>
+<div class="row">
+
+    <div class="col-lg-7"></div>
+    <div class="col-lg-2"> &nbsp; &nbsp;&nbsp; &nbsp;<strong>Total: L @Grantotal</strong></div>
+    <div class="col-lg-3">
+        @if (Model.Any())
+        {
+            using (Html.BeginForm("CrearOrden", "Carritoes", new { id = Model.First().CarritoId }, FormMethod.Post, null))
+            {
+                <button class="btn btn-black" type="submit">Proceder al pago</button>
+            }
+        }
+    </div>
+</div>

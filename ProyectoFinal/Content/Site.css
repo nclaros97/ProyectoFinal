@@ -80,3 +80,21 @@ textarea {
     -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
     box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
 }
+
+.btn-sm {
+    font-size:0.85rem !important;
+}
+
+.white {
+    background-color: #fff !important;
+}
+
+.scrolling-navbar {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    transition: background .5s ease-in-out,padding .5s ease-in-out;
+}
+
+.mdb-color.lighten-3 {
+    background-color: #929fba !important;
+}
