@@ -17,5 +17,9 @@ namespace ProyectoFinal.Context
         public System.Data.Entity.DbSet<ProyectoFinal.Models.Unidades> Unidades { get; set; }
 
         public System.Data.Entity.DbSet<ProyectoFinal.Models.ImagenProducto> ImagenesProductos { get; set; }
+
+        public System.Data.Entity.DbSet<ProyectoFinal.Models.Pedidos> Pedidos { get; set; }
+
+        public System.Data.Entity.DbSet<ProyectoFinal.Models.FormaPago> FormaPagoes { get; set; }
     }
 }

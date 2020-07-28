@@ -5,11 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace ProyectoFinal.Models
+namespace ProyectoFinal.Models.ViewModels
 {
-    public class Pedidos
+    public class PedidosViewModel
     {
-        [Key]
+        public PedidosViewModel()
+        {
+            carrito = new List<Carrito>();
+        }
         public int PedidoId { get; set; }
 
         public DateTime PedidoFecha { get; set; }
@@ -26,17 +29,17 @@ namespace ProyectoFinal.Models
 
         public string Telefono { get; set; }
 
+        public string Email { get; set; }
+
         public string PedidoDireccion { get; set; }
 
         [Display(Name = "Forma Pago")]
         public int FormaPagoId { get; set; }
 
-        public string Email { get; set; }
-
         [ForeignKey("FormaPagoId")]
         public FormaPago FormaPago { get; set; }
 
-
+        public List<Carrito> carrito { get; set; }
 
     }
 }

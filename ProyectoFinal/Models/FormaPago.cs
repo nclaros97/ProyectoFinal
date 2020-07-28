@@ -11,6 +11,6 @@ namespace ProyectoFinal.Models
 
         public string FormaPagoNombre { get; set; }
 
-
+        public virtual ICollection<Pedidos> Pedidos { get; set; }
     }
 }

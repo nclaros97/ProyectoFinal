@@ -239,8 +239,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CarritoesController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\FormaPagoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\UnidadesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -261,6 +263,7 @@
     <Compile Include="Models\ViewModels\CantCarritoViewModel.cs" />
     <Compile Include="Models\ViewModels\CreateProductosViewModel.cs" />
     <Compile Include="Models\ViewModels\DetalleProductoViewModel.cs" />
+    <Compile Include="Models\ViewModels\PedidosViewModel.cs" />
     <Compile Include="Models\ViewModels\RolesUserViewModel.cs" />
     <Compile Include="Models\ViewModels\RoleUserViewModel.cs" />
     <Compile Include="Models\ViewModels\RolViewModel.cs" />
@@ -501,6 +504,18 @@
     <Content Include="webfonts\fa-brands-400.woff" />
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
+    <Content Include="Views\Categories\Categoria.cshtml" />
+    <Content Include="Views\Categories\Filter.cshtml" />
+    <Content Include="Views\Pedidos\Create.cshtml" />
+    <Content Include="Views\Pedidos\Delete.cshtml" />
+    <Content Include="Views\Pedidos\Details.cshtml" />
+    <Content Include="Views\Pedidos\Edit.cshtml" />
+    <Content Include="Views\Pedidos\Index.cshtml" />
+    <Content Include="Views\FormaPagoes\Create.cshtml" />
+    <Content Include="Views\FormaPagoes\Delete.cshtml" />
+    <Content Include="Views\FormaPagoes\Details.cshtml" />
+    <Content Include="Views\FormaPagoes\Edit.cshtml" />
+    <Content Include="Views\FormaPagoes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

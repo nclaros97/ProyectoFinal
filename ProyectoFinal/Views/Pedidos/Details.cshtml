@@ -1,0 +1,179 @@
+﻿@model ProyectoFinal.Models.ViewModels.PedidosViewModel
+@{
+    decimal Grantotal = 0;
+    ViewBag.Title = "Detalles";
+}
+
+<!--Main layout-->
+<main class="mt-5 pt-4">
+    <div class="container wow fadeIn">
+
+        <!-- Heading -->
+        <h2 class="my-5 h2 text-center">Checkout form</h2>
+
+        <!--Grid row-->
+        <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-8 mb-4">
+
+                <!--Card-->
+                <div class="card">
+
+                    <!--Card content-->
+                    <form class="card-body">
+
+                        <!--Grid row-->
+                        <div class="row">
+
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-2">
+
+                                <!--firstName-->
+                                <div class="md-form ">
+                                    @Html.LabelFor(model => model.Nombres, htmlAttributes: new { @class = "" })
+                                    <div class="">
+                                        @Html.EditorFor(model => model.Nombres, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Nombres, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--Grid column-->
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-2">
+
+                                <!--lastName-->
+                                <div class="md-form">
+                                    @Html.LabelFor(model => model.Apellidos, htmlAttributes: new { @class = "" })
+                                    <div class="">
+                                        @Html.EditorFor(model => model.Apellidos, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Apellidos, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--Grid column-->
+
+                        </div>
+                        <!--Grid row-->
+                        <!--email-->
+                        <div class="md-form mb-5">
+                            <div class="md-form">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--address-->
+                        <div class="md-form mb-5">
+                            <div class="md-form">
+                                @Html.LabelFor(model => model.PedidoDireccion, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.PedidoDireccion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PedidoDireccion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!--metodo-->
+                        <div class="md-form mb-5">
+                            <div class="md-form">
+                                @Html.LabelFor(model => model.FormaPagoId, "Metodo de pago", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("FormaPagoId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.FormaPagoId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="cc-name">Name on card</label>
+                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                <small class="text-muted">Full name as displayed on card</small>
+                <div class="invalid-feedback">
+                    Name on card is required
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="cc-number">Credit card number</label>
+                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                <div class="invalid-feedback">
+                    Credit card number is required
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label for="cc-expiration">Expiration</label>
+                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                <div class="invalid-feedback">
+                    Expiration date required
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="cc-expiration">CVV</label>
+                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                <div class="invalid-feedback">
+                    Security code required
+                </div>
+            </div>
+        </div>*@
+                        <hr class="mb-4">
+
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continuar con el pago</button>
+
+                    </form>
+
+                </div>
+                <!--/.Card-->
+
+            </div>
+            <!--Grid column-->
+            <!--Grid column-->
+            <div class="col-md-4 mb-4">
+
+                <!-- Heading -->
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Productos a comprar</span>
+                    <span class="badge badge-secondary badge-pill">@Model.carrito.Count</span>
+                </h4>
+
+                <!-- Cart -->
+                <ul class="list-group mb-3 z-depth-1">
+                    @foreach (var item in Model.carrito)
+                    {
+                        var cantidad = (Html.DisplayFor(modelItem => item.CarritoCantidad)).ToString();
+                        var precio = Html.DisplayFor(modelItem => item.Producto.ProductoPrecio).ToString();
+                        var total = (decimal.Parse(cantidad) * decimal.Parse(precio));
+                        Grantotal += total;
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">@item.Producto.ProductoTitulo</h6>
+                                <small class="text-muted">@item.Producto.ProdutoDescripcion</small>
+                            </div>
+                            <span class="text-muted">L @item.Producto.ProductoPrecio</span>
+                        </li>
+                    }
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (L)</span>
+                        <strong>@Grantotal</strong>
+                    </li>
+                </ul>
+                <!-- Cart -->
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+    </div>
+</main>
+<!--Main layout-->

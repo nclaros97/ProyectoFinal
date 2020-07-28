@@ -75,7 +75,7 @@
     <div class="col-lg-3">
         @if (Model.Any())
         {
-            using (Html.BeginForm("CrearOrden", "Carritoes", new { id = Model.First().CarritoId }, FormMethod.Post, null))
+            using (Html.BeginForm("Details", "Pedidos", FormMethod.Post, null))
             {
                 <button class="btn btn-black" type="submit">Proceder al pago</button>
             }

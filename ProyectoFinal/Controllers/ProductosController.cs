@@ -23,6 +23,7 @@ namespace ProyectoFinal.Controllers
         // GET: Productos
         public async Task<ActionResult> Index()
         {
+
             var productos = db.Productos.Include(p => p.Category).Include(p => p.Unidades);
             return View(await productos.ToListAsync());
         }
