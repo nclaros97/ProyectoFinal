@@ -40,6 +40,8 @@ namespace ProyectoFinal.Models
 
         public virtual ICollection<Carrito> Carritos { get; set; }
 
+        public virtual ICollection<DetallePedido> DetallePedidos { get; set; }
+
         public virtual ICollection<ImagenProducto> ImagesnProductos { get; set; }
     }
 }

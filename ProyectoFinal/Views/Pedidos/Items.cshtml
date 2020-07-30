@@ -1,0 +1,65 @@
+﻿@model ProyectoFinal.Models.ViewModels.DetalleCompraViewModel
+@{
+    ViewBag.Title = "Detalle";
+    int flag = 0;
+}
+
+<h2>Items</h2>
+<table class="table">
+    @foreach (var item in Model.Detalle)
+    {
+
+
+        if(flag == 0)
+        {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(x => item.Productos.Category.CotegoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => item.Productos.Unidades.UnidadesNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => item.Productos.ProductoTitulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => item.Productos.ProdutoDescripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => item.Productos.ProductoPrecio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => item.DetalleProductoCantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => item.Productos.ProductoImagenes)
+            </th>
+        </tr>
+        }
+        flag += 1;
+        <tr>
+            <td>
+                @Html.DisplayFor(x => item.Productos.Category.CotegoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.Productos.Unidades.UnidadesNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.Productos.ProductoTitulo)
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.Productos.ProdutoDescripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.Productos.ProductoPrecio)
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.DetalleProductoCantidad)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(x => item.Productos.ProductoImagenes)" width="100">
+            </td>
+        </tr>
+
+    }
+</table>

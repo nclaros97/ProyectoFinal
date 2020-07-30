@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,12 +10,14 @@ namespace ProyectoFinal.Models
     {
         public int DetallePedidoId { get; set; }
 
+        public int PedidoId { get; set; }
+
         public int ProductoId { get; set; }
 
-        public string DetalleProductoDescripcion { get; set; }
+        [ForeignKey("ProductoId")]
+        public Productos Productos { get; set; }
 
         public int DetalleProductoCantidad { get; set; }
 
-        public decimal DetalleProductoPrecio { get; set; }
     }
 }

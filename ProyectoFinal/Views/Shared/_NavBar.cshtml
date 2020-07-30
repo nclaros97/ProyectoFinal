@@ -11,9 +11,13 @@
                     @Html.ActionLink("Inicio", "Index", "Home", null, htmlAttributes: new { @class = "nav-link" })
 
                 </li>
+                <li class="nav-item active">
+                    @Html.ActionLink("Historial Compras", "Index", "Pedidos", null, htmlAttributes: new { @class = "nav-link" })
+
+                </li>
                 @*<li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>*@
+            <a class="nav-link" href="#">Link</a>
+        </li>*@
                 @if (User.IsInRole("admin"))
                 {
                     <li class="nav-item dropdown">
@@ -41,8 +45,8 @@
                     </li>
                 }
                 @*<li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>*@
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>*@
             </ul>
 
             <div id="carrito" style="padding-left:5px;"></div>

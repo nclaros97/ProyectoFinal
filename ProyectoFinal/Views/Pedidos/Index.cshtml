@@ -4,11 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Pedidos Realizados</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -41,15 +38,27 @@
             @Html.DisplayFor(modelItem => item.TotalPedido)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EstadoPedido)
+            @switch (Html.DisplayFor(modelItem => item.EstadoPedido).ToString())
+            {
+                case "1":
+                    <p>Pedido Realizado</p>
+                    break;
+                case "2":
+                    <p>Procesando</p>
+                    break;
+                case "3":
+                    <p>Enviado</p>
+                    break;
+                case "4":
+                    <p>Terminado</p>
+                    break;
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PedidoDireccion)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PedidoId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PedidoId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PedidoId })
+            @Html.ActionLink("Ver", "Items", new { id=item.PedidoId }) 
         </td>
     </tr>
 }

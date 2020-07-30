@@ -11,6 +11,8 @@ using ProyectoFinal.Context;
 using ProyectoFinal.Models;
 using Microsoft.AspNet.Identity;
 using ProyectoFinal.Models.ViewModels;
+using System.Data.Entity.Migrations;
+using System.Web.Http.Results;
 
 namespace ProyectoFinal.Controllers
 {
@@ -60,7 +62,7 @@ namespace ProyectoFinal.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Pedidos model)
+        public async Task<ActionResult> Create(PedidosViewModel model)
         {
             string usuario = null;
             if (User.Identity.IsAuthenticated)
@@ -82,22 +84,116 @@ namespace ProyectoFinal.Controllers
 
             }
 
-            model.UsuarioId = usuario;
-            model.EstadoPedido = 1;
-            model.PedidoFecha = DateTime.Now;
-
-            var carritoUsuario = db.Carritoes.Where(c => c.UsuarioId == usuario);
+            var carritoUsuario = db.Carritoes.Include(c => c.Producto).Where(x => x.UsuarioId == usuario);
             decimal total = 0;
             foreach (var item in carritoUsuario)
             {
                 total += (decimal.Parse(item.CarritoCantidad.ToString()) * item.Producto.ProductoPrecio);
             }
-            model.TotalPedido = total;
 
-            db.Pedidos.Add(model);
-            db.SaveChanges();
+            var pedido = new Pedidos
+            {
+
+                Nombres = model.Nombres,
+                Apellidos = model.Apellidos,
+                Email = model.Email,
+                Telefono = model.Telefono,
+                UsuarioId = usuario,
+                EstadoPedido = 1,
+                FormaPagoId = model.FormaPagoId,
+                PedidoDireccion = model.PedidoDireccion,
+                PedidoFecha = DateTime.Now,
+                TotalPedido = total
+            };
+            db.Pedidos.Add(pedido);
+            await db.SaveChangesAsync();
+
+            await saveDetalleAsync(usuario, carritoUsuario, pedido.PedidoId);
 
             return RedirectToAction("Index");
+        }
+
+        private async Task saveDetalleAsync(string usuario, IQueryable<Carrito> model, int id)
+        {
+            // se usan transacciones para poder realizar varios cambios a la db al mismo tiempo4
+            using (var dbTran = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var item in model)
+                    {
+                        var detalle = new DetallePedido
+                        {
+                            DetalleProductoCantidad = item.CarritoCantidad,
+                            ProductoId = item.IdProducto,
+                            PedidoId = id
+                        };
+                        //guarda el detalle
+                        db.Set<DetallePedido>().AddOrUpdate(detalle);
+                        await db.SaveChangesAsync();
+
+                        //borrar el carrito
+                        db.Set<Carrito>().Remove(item);
+                        await db.SaveChangesAsync();
+
+                    }
+                    dbTran.Commit();
+                }
+                catch (Exception)
+                {
+                    // roll back all database operations, if any thing goes wrong
+                    dbTran.Rollback();
+                }
+            }
+        }
+
+
+        public ActionResult Items(int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            string usuario = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                usuario = User.Identity.GetUserId();
+            }
+            else
+            {
+                if (Session["UniqueIdUserAnonimo"] == null)
+                {
+                    usuario = Guid.NewGuid().ToString();
+                    Session["UniqueIdUserAnonimo"] = usuario;
+                }
+                else
+                {
+                    usuario = (string)Session["UniqueIdUserAnonimo"];
+                }
+
+
+            }
+
+            var datosPedido = db.Pedidos.Include(p => p.FormaPago).Where(p => p.PedidoId == id).FirstOrDefault();
+            var pedido = new DetalleCompraViewModel { 
+                PedidoId = datosPedido.PedidoId,
+                Nombres = datosPedido.Nombres,
+                Apellidos = datosPedido.Apellidos,
+                Email = datosPedido.Email,
+                EstadoPedido = datosPedido.EstadoPedido,
+                FormaPagoId = datosPedido.FormaPagoId,
+                PedidoDireccion = datosPedido.PedidoDireccion,
+                PedidoFecha = datosPedido.PedidoFecha,
+                Telefono = datosPedido.Telefono,
+                UsuarioId = usuario,
+            };
+
+            var detalle = db.DetallePedidos.Include(d => d.Productos).Include(d => d.Productos.Category).Include(d => d.Productos.Unidades).Where(d => d.PedidoId == id).ToList();
+
+            pedido.Detalle = detalle;
+
+            return View(pedido);
         }
 
         // GET: Pedidos/Edit/5
