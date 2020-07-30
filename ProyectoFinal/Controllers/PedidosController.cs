@@ -23,8 +23,26 @@ namespace ProyectoFinal.Controllers
         // GET: Pedidos
         public async Task<ActionResult> Index()
         {
+            string usuario = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                usuario = User.Identity.GetUserId();
+            }
+            else
+            {
+                if (Session["UniqueIdUserAnonimo"] == null)
+                {
+                    usuario = Guid.NewGuid().ToString();
+                    Session["UniqueIdUserAnonimo"] = usuario;
+                }
+                else
+                {
+                    usuario = (string)Session["UniqueIdUserAnonimo"];
+                }
 
-            return View(await db.Pedidos.ToListAsync());
+
+            }
+            return View(await db.Pedidos.Where(p => p.UsuarioId == usuario).ToListAsync());
         }
 
         // GET: Pedidos/Details/5

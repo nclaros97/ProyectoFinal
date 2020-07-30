@@ -6,61 +6,69 @@
 
 <h2>Pedidos Realizados</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PedidoFecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UsuarioId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalPedido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EstadoPedido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PedidoDireccion)
-        </th>
-        <th></th>
-    </tr>
+@if (Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PedidoFecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsuarioId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PedidoDireccion)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PedidoFecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsuarioId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalPedido)
-        </td>
-        <td>
-            @switch (Html.DisplayFor(modelItem => item.EstadoPedido).ToString())
-            {
-                case "1":
-                    <p>Pedido Realizado</p>
-                    break;
-                case "2":
-                    <p>Procesando</p>
-                    break;
-                case "3":
-                    <p>Enviado</p>
-                    break;
-                case "4":
-                    <p>Terminado</p>
-                    break;
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PedidoDireccion)
-        </td>
-        <td>
-            @Html.ActionLink("Ver", "Items", new { id=item.PedidoId }) 
-        </td>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PedidoFecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UsuarioId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPedido)
+                </td>
+                <td>
+                    @switch (Html.DisplayFor(modelItem => item.EstadoPedido).ToString())
+                    {
+                        case "1":
+                            <p>Pedido Realizado</p>
+                            break;
+                        case "2":
+                            <p>Procesando</p>
+                            break;
+                        case "3":
+                            <p>Enviado</p>
+                            break;
+                        case "4":
+                            <p>Terminado</p>
+                            break;
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PedidoDireccion)
+                </td>
+                <td>
+                    @Html.ActionLink("Ver", "Items", new { id = item.PedidoId })
+                </td>
+            </tr>
+        }
+
+    </table>
 }
-
-</table>
+else
+{
+    <h5> No ha realizado ningo pedido <a href="/">Sigue comprando</a></h5>
+}
